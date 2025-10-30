@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Registration</title>
+	  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <style>
+        body { font-family: Arial; background: #f5f5f5; }
+        .container {
+            width: 400px; margin: 100px auto; background: white;
+            padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #ccc;
+        }
+        input, button { width: 100%; padding: 10px; margin-top: 10px; }
+   </style>
+
+  
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.php">PUBLIC TRANSPORT TRACKING SYSTEM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.php">HOME<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="login.php">LOGIN</a>
+      </li>
+     <li class="nav-item">
+        <a class="nav-link" href="register.php">REGISTER</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="track1.php">TRACK</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+    <h2>Registraion form</h2>
+    <form action="register_action.php" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <label><input type="radio" name="role" value="user" required> User</label>
+        <label><input type="radio" name="role" value="conductor" required> Conductor</label>
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="login.php">Login here</a></p>
+</div>
+</body>
+
+<footer>
+    <p class= "p-3 bg-dark text-white text-center"> HAVE A SAFE JOURNEY :) <P>
+</footer>
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+</html>

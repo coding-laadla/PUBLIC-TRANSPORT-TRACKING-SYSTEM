@@ -1,0 +1,118 @@
+<?php
+// Simulated bus data for dropdown
+$busNumbers = ["900k", "111v", "22c", "34a", "102b"];
+
+// When user selects a bus number (form submit)
+$routeData = [];
+if(isset($_POST['bus_number'])){
+    $bus = $_POST['bus_number'];
+
+    // Dummy route data (Replace with database query later)
+    $routes = [
+        "900k" => ["departure" => "Chandigarh", "arrival" => "Kharar", "via" => "MDC"],
+        "111v" => ["departure" => "Mohali", "arrival" => "Zirakpur", "via" => "Aerocity"],
+        "22c" => ["departure" => "Chandigarh", "arrival" => "Panchkula", "via" => "Sector 17"],
+        "34a" => ["departure" => "Chandigarh", "arrival" => "Mohali", "via" => "Phase 7"],
+        "102b" => ["departure" => "Kharar", "arrival" => "Punjab University", "via" => "Sector 14"],
+    ];
+
+    if(isset($routes[$bus])){
+        $routeData = $routes[$bus];
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bus Route Finder</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f8f8f8;
+}
+.container{
+    width: 60%;
+    margin: auto;
+    padding-top: 50px;
+}
+select, input{
+    width: 60%;
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #888;
+    border-radius: 5px;
+}
+button{
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover{
+    background: #0056b3;
+}
+table{
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+table th, table td{
+    border: 1px solid #444;
+    padding: 12px;
+}
+table th{
+    background: #d1d1d1;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>START YOUR JOURNEY</h2>
+
+    <form method="POST">
+        <label>Enter Bus Number</label><br><br>
+        <select name="bus_number">
+            <option selected disabled>Choose Bus Number</option>
+            <?php 
+            foreach($busNumbers as $bus){
+                echo "<option value='$bus'>$bus</option>";
+            }
+            ?>
+        </select>
+        <br><br>
+        <button type="submit">Search</button>
+    </form>
+
+    <?php if(!empty($routeData)): ?>
+    <table>
+        <tr>
+            <th>Route Number</th>
+            <th>Departure From</th>
+            <th>Arriving To</th>
+            <th>Via</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td><?php echo $_POST['bus_number']; ?></td>
+            <td><?php echo $routeData['departure']; ?></td>
+            <td><?php echo $routeData['arrival']; ?></td>
+            <td><?php echo $routeData['via']; ?></td>
+            <td>
+            <form action="update_status.php" method="POST">
+            <input type="hidden" name="bus_number" value="<?php echo $_POST['bus_number']; ?>">
+            <button type="submit">Start</button>
+            </form>
+            </td>
+
+        </tr>
+    </table>
+    <?php endif; ?>
+
+</div>
+</body>
+</html>

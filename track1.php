@@ -1,0 +1,146 @@
+<?php
+// Simulated bus data for dropdown
+$busNumbers = ["900k", "111v", "22c", "34a", "102b"];
+
+// When user selects a bus number (form submit)
+$routeData = [];
+if(isset($_POST['bus_number'])){
+    $bus = $_POST['bus_number'];
+
+    // Dummy route data (Replace with database query later)
+    $routes = [
+        "900k" => ["departure" => "Railway Station", "arrival" => "MVP", "via" => "Waltair"],
+        "111v" => ["departure" => "RTC Complex", "arrival" => "Vijayanagram", "via" => "Maddilapalem"],
+        "22c" => ["departure" => "MVP", "arrival" => "Yendara", "via" => "Sagar nagar"],
+        "34a" => ["departure" => "Maddilapalem", "arrival" => "Gajuwaka", "via" => "RTC Complex"],
+        "102b" => ["departure" => "yendara", "arrival" => "Gajuwaka", "via" => "Maddilapalem"],
+    ];
+
+    if(isset($routes[$bus])){
+        $routeData = $routes[$bus];
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Document</title>
+	  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+     <style>
+body{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f8f8f8;
+}
+.container{
+    width: 60%;
+    margin: auto;
+    padding-top: 50px;
+}
+select, input{
+    width: 60%;
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #888;
+    border-radius: 5px;
+}
+button{
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover{
+    background: #0056b3;
+}
+table{
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+table th, table td{
+    border: 1px solid #444;
+    padding: 12px;
+}
+table th{
+    background: #d1d1d1;
+}
+</style>
+
+  
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.php">PUBLIC TRANSPORT TRACKING SYSTEM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.php">HOME<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="login.php">LOGIN</a>
+      </li>
+     <li class="nav-item">
+        <a class="nav-link" href="register.php">REGISTER</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="track1.php">TRACK</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="container">
+    <h2>Track Your Bus</h2>
+
+    <form method="POST">
+        <label>Enter Bus Number</label><br><br>
+        <select name="bus_number">
+            <option selected disabled>Choose Bus Number</option>
+            <?php 
+            foreach($busNumbers as $bus){
+                echo "<option value='$bus'>$bus</option>";
+            }
+            ?>
+        </select>
+        <br><br>
+        <button type="submit">Search</button>
+    </form>
+
+    <?php if(!empty($routeData)): ?>
+    <table>
+        <tr>
+            <th>Route Number</th>
+            <th>Departure From</th>
+            <th>Arriving To</th>
+            <th>Via</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td><?php echo $_POST['bus_number']; ?></td>
+            <td><?php echo $routeData['departure']; ?></td>
+            <td><?php echo $routeData['arrival']; ?></td>
+            <td><?php echo $routeData['via']; ?></td>
+            <td><a href="register.php"><button>Track</button></a></td>
+        </tr>
+    </table>
+    <?php endif; ?>
+
+</div>
+
+</body>
+</html>
